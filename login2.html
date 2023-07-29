@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            animation: slideDown 0.8s ease-in-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(0); }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            animation: slideLeft 0.5s ease-in-out;
+        }
+
+        @keyframes slideLeft {
+            from { transform: translateX(-50px); }
+            to { transform: translateX(0); }
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+            animation: pulse 0.5s ease infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 10px;
+            color: #4CAF50;
+            animation: slideUp 0.8s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); }
+            to { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Credit Card Details</h1>
+        <form onsubmit="return validateForm()">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+
+            <label for="idNumber">ID Number (9 digits):</label>
+            <input type="text" id="idNumber" name="idNumber" placeholder="Enter your ID number" pattern="[0-9]{9}" required maxlength="9">
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="creditCard">Credit Card Number:</label>
+            <input type="text" id="creditCard" name="creditCard" placeholder="Enter your credit card number" pattern="[0-9]{16}" required maxlength="16">
+
+            <label for="expiryDate">Expiry Date (MM/YY):</label>
+            <input type="text" id="expiryDate" name="expiryDate" placeholder="Enter expiry date (MM/YY)" pattern="(0[1-9]|1[0-2])\/[0-9]{2}" required maxlength="5">
+
+            <label for="cvv">CVV (3 digits):</label>
+            <input type="password" id="cvv" name="cvv" placeholder="Enter CVV" pattern="[0-9]{3}" required maxlength="3">
+
+            <input type="submit" value="Submit">
+        </form>
+        <div class="message">Please enter your credit card details to proceed.</div>
+    </div>
+    <script>
+        function validateForm() {
+            const expiryDateInput = document.getElementById("expiryDate");
+            const cvvInput = document.getElementById("cvv");
+            const idNumberInput = document.getElementById("idNumber");
+            
+            // Check if the expiry date is in the valid format (MM/YY)
+            const expiryDatePattern = /^(0[1-9]|1[0-2])\/[0-9]{2}$/;
+            if (!expiryDatePattern.test(expiryDateInput.value)) {
+                alert("Please enter a valid expiry date in the format MM/YY.");
+                return false;
+            }
+
+            // Check if the CVV is exactly 3 digits
+            const cvvPattern = /^[0-9]{3}$/;
+            if (!cvvPattern.test(cvvInput.value)) {
+                alert("Please enter a valid CVV consisting of 3 digits.");
+                return false;
+            }
+
+            // Check if the ID number is exactly 9 digits
+            const idNumberPattern = /^[0-9]{9}$/;
+            if (!idNumberPattern.test(idNumberInput.value)) {
+                alert("Please enter a valid ID number consisting of 9 digits.");
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
+</body>
+</html>
